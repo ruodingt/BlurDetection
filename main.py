@@ -22,7 +22,7 @@ def evaluate(img_col, args):
     assert isinstance(args, argparse.Namespace), 'args must be of type argparse.Namespace not {0}'.format(type(args))
     img_gry = cv2.cvtColor(img_col, cv2.COLOR_RGB2GRAY)
     rows, cols = img_gry.shape
-    crow, ccol = rows/2, cols/2
+    crow, ccol = int(rows/2), int(cols/2)
     f = numpy.fft.fft2(img_gry)
     fshift = numpy.fft.fftshift(f)
     fshift[crow-75:crow+75, ccol-75:ccol+75] = 0
@@ -75,6 +75,7 @@ if __name__ == '__main__':
                             x_okay.append(x)
                             y_okay.append(y)
                 elif args.mask:
+                    print(img_path)
                     msk, res, blurry = FocusMask.blur_mask(img)
                     img_msk = cv2.bitwise_and(img, img, mask=msk)
                     if args.display:

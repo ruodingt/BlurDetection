@@ -85,7 +85,7 @@ def blur_mask(img):
     msk = morphology(msk)
     logger.debug('evaluation complete')
     result = numpy.sum(msk)/(255.0*msk.size)
-    logger.info('{0}% of input image is blurry'.format(int(100*result)))
+    logger.info('BLURRY: {0}, {1}% of input image is blurry'.format(blurry, int(100*result)))
     return msk, result, blurry
 
 
